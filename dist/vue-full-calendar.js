@@ -3012,6 +3012,11 @@ var FullCalendar$1 = { render: function render() {
 
 
   computed: {
+    currentDate: function currentDate() {
+      if (this.calendar != null) {
+        return this.calendar.getDate();
+      }
+    },
     defaultConfig: function defaultConfig() {
       var self = this;
       return {
@@ -3160,6 +3165,14 @@ var FullCalendar$1 = { render: function render() {
     },
     selectDate: function selectDate(date) {
       this.calendar.gotoDate(date);
+    },
+    currentDate: function currentDate(date) {
+      var changeDate = {
+        year: date._i[0],
+        month: date._i[1] + 1,
+        day: date._i[2]
+      };
+      this.$emit("change-date", changeDate);
     }
   },
 

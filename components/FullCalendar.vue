@@ -81,6 +81,11 @@ export default {
   },
 
   computed: {
+    currentDate() {
+      if (this.calendar != null) {
+        return this.calendar.getDate()
+      }
+    },
     defaultConfig() {
       const self = this;
       return {
@@ -205,6 +210,14 @@ export default {
     },
     selectDate(date) {
       this.calendar.gotoDate(date);
+    },
+    currentDate(date) {
+      const changeDate = {
+        year: date._i[0],
+        month: date._i[1] + 1,
+        day: date._i[2],
+      }
+      this.$emit("change-date", changeDate);
     }
   },
 
